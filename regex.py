@@ -18,4 +18,11 @@ def single_find():
 	if match:
 		print("found: ", match.group())
 
-find_all()
+def capture():
+	text = "aircraft and jetter"
+	matches = re.findall(r'(air(?:craft|plane)|jet)', text)
+
+	for string in matches:
+		print(string)
+
+capture()
