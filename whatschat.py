@@ -21,7 +21,7 @@ users = []
 
 while True:
 	try:
-		line = input()
+		line = raw_input()
 		
 		match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}), (\d{1,2}:\d{2} (?:(?:P|A)M)) - ((?:\w+ )*\w+):', line)
 		
