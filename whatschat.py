@@ -8,6 +8,8 @@ as an input and displays useful information like
 """
 
 from sys import argv, exit
+import re
+from User import User
 
 line_count = 0
 
@@ -15,11 +17,39 @@ line_count = 0
 # 	print("usage: ", argv[0], " <txt>")
 # 	exit()
 
+users = []
+
 while True:
 	try:
 		line = input()
+		
+		match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}), (\d{1,2}:\d{2} (?:(?:P|A)M)) - ((?:\w+ )*\w+):', line)
+		
+		if match:
+			date = match.group(1)
+			time = match.group(2)
+			name = match.group(3)
+
+			matchedUser = None
+
+			for user in users:
+				if user.name == name:
+					matchedUser = user
+
+			if matchedUser:
+				matchedUser.messageCount += 1
+
+			else:
+				users.append(User(name))
+
 		line_count += 1
 	except EOFError:
 		break
 
-print("Line count: ", line_count)
+print("Users : ", len(users))
+totalMessages = 0
+for user in users:
+	totalMessages += user.messageCount
+	print("User ", user.name, " has sent ", user.messageCount, " messages.")
+
+print("Total message count : ", totalMessages)

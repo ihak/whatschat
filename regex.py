@@ -5,10 +5,10 @@ def find_all():
 	# Open file
 	f = open('chat.txt', 'r')
 	# Feed the file text into findall(); it returns a list of all the found strings
-	match = re.match(r'\d{1,2}/\d{1,2}/\d{2}, \d{1,2}:\d{2} (?:(?:P|A)M) - (?:\w+ )*\w+:', f.read())
+	match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}), (\d{1,2}:\d{2} (?:(?:P|A)M)) - ((?:\w+ )*\w+):', f.read())
 
 	if match:
-		print("match: ", match.group(0))
+		print("match: ", match.group(3))
 
 def single_find():
 	text = "9/13/16, 12:33 PM - Hanif Mianjee: <Media omitted>"
