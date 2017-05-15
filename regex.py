@@ -1,5 +1,5 @@
 import re
-
+from datetime import datetime
 
 def find_all():
 	# Open file
@@ -11,10 +11,10 @@ def find_all():
 		print("match: ", match.group(3))
 
 def single_find():
-	text = "9/13/16, 12:33 PM - Hanif Mianjee: <Media omitted>"
-	match = re.match(r'^\d{1,2}/\d{1,2}/\d{1,2}, \d{1,2}:\d{2} (?:(?:P|A)M) - (?:\w+\s)*\w+:', text)
+	text = "11/7/16, 11:09 PM - Hassan Ahmed Khan: <Meida Omitted>"
+	match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}, \d{1,2}:\d{2} (?:P|A)M) - ((?:\w+ )*\w+): (.+)', text)
 	if match:
-		print("found: ", match.group(1))
+		print("found: ", match.group(3))
 
 def capture():
 	text = "aircraft and jet"
@@ -30,6 +30,18 @@ def match():
 	if match:
 		print("found: ", match.group(1))	
 
-# single_find()
-find_all()
-# match()
+def date():
+	date1 = "9/13/16, 12:33 PM"
+	date2 = "9/23/16, 12:34 PM"
+
+	fmt = "%m/%d/%y, %I:%M %p"
+	time1 = datetime.strptime(date1, fmt)
+	time2 = datetime.strptime(date2, fmt)
+	diff = time2 - time1
+
+	print("date: ", time1)
+	print("date: ", time2)
+	print("diff: ", diff)
+
+# date()
+single_find()

@@ -10,25 +10,27 @@ as an input and displays useful information like
 from sys import argv, exit
 import re
 from User import User
-
-line_count = 0
+from Message import Message
 
 # if len(argv) < 2:
 # 	print("usage: ", argv[0], " <txt>")
 # 	exit()
 
 users = []
+messages = []
 
 while True:
 	try:
 		line = raw_input()
 		
-		match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}), (\d{1,2}:\d{2} (?:(?:P|A)M)) - ((?:\w+ )*\w+):', line)
+		match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}, \d{1,2}:\d{2} (?:P|A)M) - ((?:\w+ )*\w+): (.+)', line)
 		
 		if match:
 			date = match.group(1)
-			time = match.group(2)
-			name = match.group(3)
+			name = match.group(2)
+			text = match.group(3)
+
+			print(date)
 
 			matchedUser = None
 
@@ -40,16 +42,22 @@ while True:
 				matchedUser.messageCount += 1
 
 			else:
-				users.append(User(name))
+				matchedUser = User(name)
+				users.append(matchedUser)
 
-		line_count += 1
+			msg = Message(date, matchedUser, text)
+			messages.append(msg)
+
 	except EOFError:
 		break
 
 print("Users : ", len(users))
-totalMessages = 0
 for user in users:
-	totalMessages += user.messageCount
 	print("User ", user.name, " has sent ", user.messageCount, " messages.")
 
-print("Total message count : ", totalMessages)
+date1 = messages[0].date_time
+date2 = messages[-1].date_time
+duration = date2 - date1
+
+print("Total message count : ", len(messages))
+print("Duration: ", duration)
