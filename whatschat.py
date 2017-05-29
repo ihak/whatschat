@@ -19,6 +19,31 @@ from Message import Message
 users = []
 messages = []
 
+def message_count(user, type):
+	count = 0
+	for message in messages:
+		if (message.user.name == user.name) and  (message.type == type):
+			count += 1
+	return count
+
+def message_print(user, type):
+	for message in messages:
+		if (message.user.name == user.name) and (message.type == type):
+			# print(message.message)
+			pass
+
+def word_count(user, word):
+	count = 0
+	for message in messages:
+		if (message.user.name == user.name) and (message.type == 'text'):
+			wordCount = message.message.lower().count(word)
+			count += wordCount
+
+			if wordCount > 0:
+				print(message.message)
+
+	return count
+
 while True:
 	try:
 		line = raw_input()
@@ -30,7 +55,7 @@ while True:
 			name = match.group(2)
 			text = match.group(3)
 
-			print(date)
+			# print(date)
 
 			matchedUser = None
 
@@ -54,10 +79,18 @@ while True:
 print("Users : ", len(users))
 for user in users:
 	print("User ", user.name, " has sent ", user.messageCount, " messages.")
+	print("Media messages: ", message_count(user, 'media'), "Text messages: ", message_count(user, 'text'), "Links: ", message_count(user, 'link'))
+	print("word used: ", word_count(user, "lol"))
 
 date1 = messages[0].date_time
 date2 = messages[-1].date_time
 duration = date2 - date1
 
 print("Total message count : ", len(messages))
-print("Duration: ", duration)
+
+print("Duration: ", duration.days)
+
+print(messages[76].message)
+
+user = users[1]
+message_print(user, 'link')

@@ -11,8 +11,8 @@ def find_all():
 		print("match: ", match.group(3))
 
 def single_find():
-	text = "11/7/16, 11:09 PM - Hassan Ahmed Khan: <Meida Omitted>"
-	match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}, \d{1,2}:\d{2} (?:P|A)M) - ((?:\w+ )*\w+): (.+)', text)
+	text = "11/7/16, 11:21 PM - Hanif Mianjee: https://www.linkedin.com/in/hanif-mianjee"
+	match = re.match(r'(\d{1,2}/\d{1,2}/\d{2}, \d{1,2}:\d{2} (?:P|A)M) - ((?:\w+ )*\w+): (http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+)', text)
 	if match:
 		print("found: ", match.group(3))
 
@@ -44,4 +44,5 @@ def date():
 	print("diff: ", diff)
 
 # date()
-single_find()
+# single_find()
+capture()
