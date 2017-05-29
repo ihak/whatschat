@@ -31,8 +31,8 @@ def match():
 		print("found: ", match.group(1))	
 
 def date():
-	date1 = "9/13/16, 12:33 PM"
-	date2 = "9/23/16, 12:34 PM"
+	date1 = "9/23/16, 11:45 PM"
+	date2 = "9/24/16, 12:05 AM"
 
 	fmt = "%m/%d/%y, %I:%M %p"
 	time1 = datetime.strptime(date1, fmt)
@@ -41,8 +41,11 @@ def date():
 
 	print("date: ", time1)
 	print("date: ", time2)
-	print("diff: ", diff)
+	print("diff days: ", diff.days)
+	print("diff seconds: ", diff.seconds)
 
 # date()
 # single_find()
 capture()
+
+# date()
