@@ -30,7 +30,7 @@ def message_count(user, type):
 def message_print(user, type):
 	for message in messages:
 		if (message.user.name == user.name) and (message.type == type):
-			# print(message.message)
+			print(message.message)
 			pass
 
 def word_count(user, word):
@@ -40,8 +40,8 @@ def word_count(user, word):
 			wordCount = message.message.lower().count(word)
 			count += wordCount
 
-			if wordCount > 0:
-				print(message.message)
+			# if wordCount > 0:
+				# print(message.message)
 
 	return count
 
@@ -79,7 +79,7 @@ print("Users : ", len(users))
 for user in users:
 	print("User ", user.name, " has sent ", user.messageCount, " messages.")
 	print("Media messages: ", message_count(user, 'media'), "Text messages: ", message_count(user, 'text'), "Links: ", message_count(user, 'link'))
-	print("word used: ", word_count(user, "lol"))
+	# print("word used: ", word_count(user, "lol"))
 
 date1 = messages[0].date_time
 date2 = messages[-1].date_time
@@ -98,7 +98,7 @@ for message in messages:
 		time2 = datetime.strftime(message.date_time, fmt)
 		
 		diff = message.date_time - previous.date_time
-		print("comparing ", time1, " with ", time2, "diff: ", diff)
+		# print("comparing ", time1, " with ", time2, "diff: ", diff)
 		if diff.total_seconds() < 3600:
 			arr.append(message)
 		else:
