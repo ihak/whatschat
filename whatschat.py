@@ -92,32 +92,32 @@ def group_description(groups):
 		if max_messages < message_count:
 			max_messages = message_count
 
-		print("{} messages sent between {} and {} over a duration of {} minutes".format(message_count, startTimeStr, endTimeStr, minutes))
+		# print("{} messages sent between {} and {} over a duration of {} minutes".format(message_count, startTimeStr, endTimeStr, minutes))
 
-	print("Maximum number of messages sent: {}".format(max_messages))
-	print("Maximum number of minutes: {}".format(max_minutes))
+	print("Maximum messages exchanged in a conversation: {}".format(max_messages))
+	print("Maximum conversation length: {} minutes".format(max_minutes))
 
 def group_max(groups):
 	max_minutes = 0
-		max_messages = 0
+	max_messages = 0
 
-		for key,value in groups.items():
-			startTime = value[0].date_time
-			endTime = value[-1].date_time
+	for key,value in groups.items():
+		startTime = value[0].date_time
+		endTime = value[-1].date_time
 
-			fmt = "%m/%d/%y, %I:%M %p"
-			startTimeStr = datetime.strftime(startTime, fmt)
-			endTimeStr = datetime.strftime(endTime, fmt)
-			duration = endTime - startTime
-			
-			minutes = duration.seconds/60
-			message_count = len(value)
+		fmt = "%m/%d/%y, %I:%M %p"
+		startTimeStr = datetime.strftime(startTime, fmt)
+		endTimeStr = datetime.strftime(endTime, fmt)
+		duration = endTime - startTime
+		
+		minutes = duration.seconds/60
+		message_count = len(value)
 
-			if max_minutes < minutes:
-				max_minutes = minutes
+		if max_minutes < minutes:
+			max_minutes = minutes
 
-			if max_messages < message_count:
-				max_messages = message_count
+		if max_messages < message_count:
+			max_messages = message_count
 
 	return (max_messages, max_minutes)	
 
@@ -163,9 +163,10 @@ def main():
 	duration = date2 - date1
 
 	groups = group_messages(messages)
+
+	print( "Total Conversations: {}".format(len(groups)))
 	group_description(groups)
 
-	print("Conversations: ", len(groups))
 	# print("Group: ", groups)
 
 	print("Total messages exchanged: ", len(messages))
